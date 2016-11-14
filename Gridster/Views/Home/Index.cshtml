@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <a href="#" class="btn" id="addSeat">Добавить место</a>
+        <a href="#" class="btn" id="addTable">Добавить стол</a>
+        <a href="#" class="btn" id="addSpace">Добавить пустой блок</a>
+        <div id="demo-1" class="gridster">
+            <ul>
+                <li class="notbooked showseats" data-row="1" data-col="1" data-sizex="1" data-sizey="1" data-max-sizex="1" data-max-sizey="1">0
+                <span></span>
+                </li>
+                <li class="table" data-row="1" data-col="3" data-sizex="1" data-sizey="2">Стол
+                    <span></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+@section Scripts{
+<script src="http://gridster.net/dist/jquery.gridster.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+      var gridster;
+      var seatCount = 1;
+      $(function(){
+
+          $('#addSeat').click(function () {
+              gridster.add_widget('<li class="notbooked showseats" data-row="1" data-col="1" data-sizex="1" data-sizey="1" data-max-sizex="1" data-max-sizey="1">' + (seatCount++) +
+                '<span></span>' +
+                '</li>');
+          });
+
+          $('#addTable').click(function () {
+              gridster.add_widget('<li class="table" data-row="1" data-col="1" data-sizex="1" data-sizey="1">Стол' +
+                '<span></span>' +
+                '</li>');
+          });
+
+          $('#addSpace').click(function () {
+              gridster.add_widget('<li class="space" data-row="1" data-col="1" data-sizex="1" data-sizey="1">' +
+                '<span></span>' +
+                '</li>');
+          });
+        gridster = $(".gridster ul").gridster({
+          widget_base_dimensions: [32, 32],
+          widget_margins: [5, 5],
+          helper: 'clone',
+          min_cols: 15,
+          min_rows: 15,
+          autogrow_cols: true,
+          resize: {
+            enabled: true
+          }
+        }).data('gridster');
+
+
+        $('.js-resize-random').on('click', function() {
+            gridster.resize_widget(gridster.$widgets.eq(getRandomInt(0, 9)),
+                getRandomInt(1, 4), getRandomInt(1, 4))
+        });
+
+      });
+</script>
+    }
