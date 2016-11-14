@@ -18,6 +18,8 @@ namespace Gridster.Controllers
 
         public ManageController()
         {
+            //Test
+            string hz = "hz";
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
